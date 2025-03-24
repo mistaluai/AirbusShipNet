@@ -1,5 +1,5 @@
 import os
-from typing import Any
+from typing import Tuple
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -10,25 +10,24 @@ class DataProcessor:
         self.csv_file = csv_file
         self.seed = seed
         self.csv_path = os.path.join(self.dataset_root, self.csv_file)
-        self.df = self.__preprocess_data()
-        self.train_data, self.val_data, self.test_data = self.__split_data()
 
-    def __preprocess_data(self) -> pd.DataFrame:
+    def get_data(self) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+        df = self._preprocess_data()
+        return self._split_data(df)
+
+    def _preprocess_data(self) -> pd.DataFrame:
         df = pd.read_csv(self.csv_path)
-        df['ImagePath'] = df['ImageId'].apply(lambda id: os.path.join(self.dataset_root, 'train_v2', id))
+        df['ImagePath'] = df['ImageId'].apply(lambda image_id: os.path.join(self.dataset_root, 'train_v2', image_id))
         df['label'] = df['EncodedPixels'].notna().astype(int)
         df.drop(columns=['ImageId', 'EncodedPixels'], inplace=True)
         return df
 
-    def get_data(self) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-        return self.train_data, self.val_data, self.test_data
-
-    def __split_data(self) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    def _split_data(self, df: pd.DataFrame):
         train, evaluation = train_test_split(
-            self.df,
+            df,
             test_size=0.2,
             random_state=self.seed,
-            stratify=self.df['label']
+            stratify=df['label']
         )
         val, test = train_test_split(
             evaluation,
