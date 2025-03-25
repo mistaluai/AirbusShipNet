@@ -3,7 +3,7 @@ import torch.nn as nn
 import torchvision
 from torch.utils.data import Dataset
 import pandas as pd
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from torchvision.transforms import v2
 ## Example Usage https://www.kaggle.com/code/mistaluai/classificationstage-datasetusage
 class ClassificationDataset(Dataset):
@@ -26,7 +26,13 @@ class ClassificationDataset(Dataset):
         image_path = self.df.iloc[idx]['ImagePath']
         label = self.df.iloc[idx]['label']
 
-        image = Image.open(image_path).convert('RGB')
+        try:
+            image = Image.open(image_path).convert('RGB')
+        except (OSError, UnidentifiedImageError):
+            print(f'Image {image_path} truncated, therefore skipping.')
+            next_idx = idx + 1
+            return self.__getitem__(next_idx)
+
         image = self.transform(image)
 
         label = torch.tensor(label, dtype=torch.float32)
