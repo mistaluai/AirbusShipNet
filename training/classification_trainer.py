@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from jinja2 import optimizer
 from tqdm import tqdm
 from copy import deepcopy
 
@@ -12,7 +11,6 @@ class ClassificationTrainer:
         self.device = device
         self.scaler = torch.amp.GradScaler(device=device)
         self.model_path = model_path
-
         self.optimizer = optimizer
 
     def save_model(self, model, verbose):
@@ -79,7 +77,7 @@ class ClassificationTrainer:
 
             self.scaler.scale(loss).backward()
 
-            self.scaler.step(optimizer)
+            self.scaler.step(self.optimizer)
             self.scaler.update()
 
             total_loss += loss.item()
