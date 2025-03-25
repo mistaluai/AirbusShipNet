@@ -17,7 +17,7 @@ class ClassificationDataset(Dataset):
         ])
 
     def get_pos_weight(self):
-        return self.df['label'].value_counts(normalize=True)[1]
+        return torch.tensor(self.df['label'].value_counts(normalize=True)[1], dtype=torch.float32)
     
     def __len__(self):
         return len(self.df)
@@ -29,7 +29,7 @@ class ClassificationDataset(Dataset):
         image = Image.open(image_path).convert('RGB')
         image = self.transform(image)
 
-        label = torch.tensor(label, dtype=torch.long)
+        label = torch.tensor(label, dtype=torch.float32)
 
         return image, label
 
