@@ -74,6 +74,7 @@ class ClassificationTrainer:
 
             with torch.amp.autocast(device_type=self.device):
                 outputs = self.model(inputs)
+                outputs = outputs.squeeze(1)
                 loss = self.criterion(outputs, labels)
 
             self.scaler.scale(loss).backward()
@@ -115,6 +116,7 @@ class ClassificationTrainer:
                 # Forward pass
                 with torch.amp.autocast(device_type=self.device):
                     outputs = self.model(inputs)
+                    outputs = outputs.squeeze(1)
                     loss = self.criterion(outputs, labels)
 
                 total_loss += loss.item()

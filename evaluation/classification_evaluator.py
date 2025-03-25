@@ -32,6 +32,7 @@ class ClassificationEvaluator:
 
                     # Forward pass
                     logits = self.model(inputs)
+                    logits = logits.squeeze(1)
                     loss = self.criterion(logits, labels)
                     val_loss += loss.item()
 
