@@ -1,0 +1,58 @@
+16.9s 1 Random seed 2005 has been set.
+279.0s 2 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+1885.5s 3 epoch 1/10
+1885.5s 4 train_loss: 0.0004, train_accuracy: 83.19%
+1885.5s 5 val_loss: 0.0004, val_accuracy: 90.35%
+2111.5s 6 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+3567.2s 7 epoch 2/10
+3567.2s 8 train_loss: 0.0002, train_accuracy: 91.65%
+3567.2s 9 val_loss: 0.0002, val_accuracy: 94.17%
+3795.8s 10 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+5255.1s 11 epoch 3/10
+5255.1s 12 train_loss: 0.0002, train_accuracy: 92.41%
+5255.1s 13 val_loss: 0.0002, val_accuracy: 91.94%
+5483.3s 14 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+6974.3s 15 epoch 4/10
+6974.3s 16 train_loss: 0.0002, train_accuracy: 92.97%
+6974.3s 17 val_loss: 0.0002, val_accuracy: 94.11%
+7201.5s 18 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+8692.6s 19 epoch 5/10
+8692.6s 20 train_loss: 0.0002, train_accuracy: 93.42%
+8692.6s 21 val_loss: 0.0002, val_accuracy: 93.75%
+8926.3s 22 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+10389.3s 23 epoch 6/10
+10389.3s 24 train_loss: 0.0002, train_accuracy: 93.68%
+10389.3s 25 val_loss: 0.0002, val_accuracy: 94.77%
+10621.6s 26 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+12146.2s 27 epoch 7/10
+12146.2s 28 train_loss: 0.0002, train_accuracy: 93.97%
+12146.2s 29 val_loss: 0.0002, val_accuracy: 95.46%
+12384.2s 30 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+13893.5s 31 epoch 8/10
+13893.5s 32 train_loss: 0.0002, train_accuracy: 94.14%
+13893.5s 33 val_loss: 0.0002, val_accuracy: 95.02%
+14127.8s 34 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+15610.4s 35 epoch 9/10
+15610.4s 36 train_loss: 0.0002, train_accuracy: 94.25%
+15610.4s 37 val_loss: 0.0002, val_accuracy: 94.80%
+15849.0s 38 Image /kaggle/input/airbus-ship-detection/train_v2/6384c3e78.jpg truncated, therefore skipping.
+17362.6s 39 epoch 10/10
+17362.6s 40 train_loss: 0.0002, train_accuracy: 94.55%
+17362.6s 41 val_loss: 0.0001, val_accuracy: 95.84%
+17508.4s 42 Loss: 0.0619
+17508.4s 43 Accuracy: 0.9596
+17508.4s 44 Precision: 0.9673
+17508.4s 45 Recall: 0.9163
+17508.4s 46 F1 Score: 0.9411
+17515.2s 47 /usr/local/lib/python3.10/dist-packages/traitlets/traitlets.py:2915: FutureWarning: --Exporter.preprocessors=["remove_papermill_header.RemovePapermillHeader"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.
+17515.2s 48 warn(
+17515.2s 49 [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+17515.5s 50 [NbConvertApp] Writing 112585 bytes to __notebook__.ipynb
+17516.8s 51 /usr/local/lib/python3.10/dist-packages/traitlets/traitlets.py:2915: FutureWarning: --Exporter.preprocessors=["nbconvert.preprocessors.ExtractOutputPreprocessor"] for containers is deprecated in traitlets 5.0. You can pass `--Exporter.preprocessors item` ... multiple times to add items to a list.
+17516.8s 52 warn(
+17516.9s 53 [NbConvertApp] Converting notebook __notebook__.ipynb to html
+17517.9s 54 [NbConvertApp] Support files will be in __results___files/
+17517.9s 55 [NbConvertApp] Making directory __results___files
+17517.9s 56 [NbConvertApp] Making directory __results___files
+17517.9s 57 [NbConvertApp] Making directory __results___files
+17517.9s 58 [NbConvertApp] Writing 301809 bytes to __results__.html
