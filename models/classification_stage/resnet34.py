@@ -8,7 +8,7 @@ class ResNet34(nn.Module):
         self.dropout = dropout
         self.hidden_units = hidden_units
         self.model = self._init_backbone(
-            models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1)
+            models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1, progress=False)
         )
 
     def _init_backbone(self, backbone: nn.Module) -> nn.Module:
