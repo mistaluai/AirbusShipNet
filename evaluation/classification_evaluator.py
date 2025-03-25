@@ -16,7 +16,7 @@ class ClassificationEvaluator:
         self.criterion = criterion
         self.device = device
 
-    def evaluate(self, verbose=0):
+    def evaluate(self, verbose=False):
         self.model.eval()
         val_loss = 0
         all_labels = []
