@@ -5,14 +5,20 @@ from tqdm import tqdm
 from copy import deepcopy
 
 class ClassificationTrainer:
-    def __init__(self, model, optimizer, loss_fn, dataloaders, parameters_lrs, lr, device='cuda'):
+    def __init__(self, model, optimizer, loss_fn, dataloaders, parameters_lrs, lr, device='cuda', model_path='./'):
         self.model = model
         self.criterion = loss_fn
         self.dataloader = dataloaders
         self.device = device
         self.scaler = torch.amp.GradScaler(device=device)
+        self.model_path = model_path
 
         self.optimizer = optimizer(params=parameters_lrs, lr=lr)
+
+    def save_model(self, model, verbose):
+        torch.save(model.state_dict(), self.model_path + "best_model.pth")
+        if verbose:
+            print(f"Saved model to {self.model_path}best_model.pth")
 
     def train(self, epochs, verbose=False):
         best_val_accuracy = 0
@@ -45,6 +51,8 @@ class ClassificationTrainer:
 
         if verbose:
             print(f"\nBest Validation Accuracy: {best_val_accuracy:.2f}%")
+
+        self.save_model(model=best_model, verbose=verbose)
 
         return best_model, history
 
