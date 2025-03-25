@@ -3,21 +3,21 @@ import torch.nn as nn
 import torchvision.models as models 
 
 class ResNet34(nn.Module):
-    def __init__(self, hidden_units: int = 256, dropout: float= 0.5) -> None:
+    def __init__(self, fc_layer=None) -> None:
         super(ResNet34, self).__init__()
-        self.dropout = dropout
-        self.hidden_units = hidden_units
         self.model = self._init_backbone(
-            models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1, progress=False)
+            models.resnet34(weights=models.ResNet34_Weights.IMAGENET1K_V1, progress=False),
+            fc_layer
         )
 
-    def _init_backbone(self, backbone: nn.Module) -> nn.Module:
+    def _init_backbone(self, backbone: nn.Module, fc_layer) -> nn.Module:
         in_features = backbone.fc.in_features
+
+        if fc_layer is None:
+            fc_layer = nn.Linear(in_features, 1)
+
         backbone.fc = nn.Sequential(
-            nn.Linear(in_features, self.hidden_units),
-            nn.ReLU(inplace=True),
-            nn.Dropout(self.dropout),
-            nn.Linear(self.hidden_units, 1)
+           *fc_layer
         )
         return backbone
 
