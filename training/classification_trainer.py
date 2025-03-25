@@ -5,7 +5,7 @@ from tqdm import tqdm
 from copy import deepcopy
 
 class ClassificationTrainer:
-    def __init__(self, model, optimizer, loss_fn, dataloaders, parameters_lrs, lr, device='cuda', model_path='./'):
+    def __init__(self, model, optimizer, loss_fn, dataloaders, device='cuda', model_path='./'):
         self.model = model
         self.criterion = loss_fn
         self.dataloader = dataloaders
@@ -13,7 +13,7 @@ class ClassificationTrainer:
         self.scaler = torch.amp.GradScaler(device=device)
         self.model_path = model_path
 
-        self.optimizer = optimizer(params=parameters_lrs, lr=lr)
+        self.optimizer = optimizer
 
     def save_model(self, model, verbose):
         torch.save(model.state_dict(), self.model_path + "best_model.pth")
