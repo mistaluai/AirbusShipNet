@@ -11,10 +11,17 @@ class DataProcessor:
         self.csv_path = os.path.join(self.dataset_root, self.csv_file)
 
     def get_data(self) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-        return self._split_data(self._preprocess_data())
+        return self._split_data(self._preprocess_and_group())
 
-    def _preprocess_data(self) -> pd.DataFrame:
-        pass
+    def _preprocess_and_group(self) -> pd.DataFrame:
+        df = pd.read_csv(self.csv_path)
+        df.dropna(subset=['EncodedPixels'], inplace=True)
+        image_dir = os.path.join(self.dataset_root, self.image_subdir)
+        df['ImageId'] = df['ImageId'].apply(lambda image_id: os.path.join(image_dir, image_id))
+
+        # Group RLEs by ImageId
+        grouped_df = df.groupby('ImageId')['EncodedPixels'].apply(list).reset_index()
+        return grouped_df
 
     def _split_data(self, df: pd.DataFrame):
         train, evaluation = train_test_split(
