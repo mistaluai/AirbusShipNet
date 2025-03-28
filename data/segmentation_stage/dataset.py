@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 import pandas as pd
 
 from torch.utils.data import Dataset
@@ -16,7 +17,31 @@ class SegmentationDataset(Dataset):
 
     @staticmethod
     def rle_decode(mask_rle: str, shape: tuple[int, int] = (768, 768)) -> torch.Tensor:
-        pass
+        s_np = np.asarray(mask_rle.split(), dtype=int)     
+
+        starts = torch.from_numpy(s_np[0::2] - 1) 
+        lengths = torch.from_numpy(s_np[1::2])
+        ends = starts + lengths
+
+        img_size = shape[0] * shape[1]
+
+        # Clip indices
+        starts = torch.clamp(starts, 0, img_size - 1)
+        ends = torch.clamp(ends, 0, img_size)
+
+        temp_ary = torch.zeros(img_size + 1, dtype=torch.int16)
+        # index_add_(dim, index, tensor) -> adds tensor elements to self at indices in index
+        temp_ary.index_add_(0, starts, torch.ones_like(starts, dtype=torch.int16))
+        temp_ary.index_add_(0, ends, torch.full_like(ends, -1, dtype=torch.int16)) # Add -1 at ends
+
+        # Compute cumulative sum and reshape
+        flat_mask = torch.cumsum(temp_ary, dim=0)[:-1] # Remove the extra element
+
+        # Reshape to (W, H) then transpose to (H, W)
+        mask = flat_mask.reshape((shape[1], shape[0])).T
+
+        # Return the mask as a tensor of type uint8
+        return (mask > 0).to(torch.uint8) 
 
     def __len__(self):
         return len(self.df)
