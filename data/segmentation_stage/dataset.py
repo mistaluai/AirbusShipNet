@@ -25,10 +25,6 @@ class SegmentationDataset(Dataset):
 
         img_size = shape[0] * shape[1]
 
-        # Clip indices
-        starts = torch.clamp(starts, 0, img_size - 1)
-        ends = torch.clamp(ends, 0, img_size)
-
         temp_ary = torch.zeros(img_size + 1, dtype=torch.int16)
         # index_add_(dim, index, tensor) -> adds tensor elements to self at indices in index
         temp_ary.index_add_(0, starts, torch.ones_like(starts, dtype=torch.int16))
