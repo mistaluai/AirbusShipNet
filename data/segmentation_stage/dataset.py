@@ -8,6 +8,7 @@ from torchvision.tv_tensors import Mask
 
 from PIL import Image, UnidentifiedImageError
 
+## Example Usage https://www.kaggle.com/code/mohamedmohiey/segmentation-datasetusage
 class SegmentationDataset(Dataset):
     def __init__(self, df: pd.DataFrame, original_shape: tuple[int, int] = (768, 768), transform=None):
         self.df = df
